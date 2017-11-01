@@ -1,0 +1,48 @@
+@font-face {
+    font-family: InconsolataBold;
+    src: url(../fonts/Inconsolata-Bold.ttf);
+    font-weight:800;
+}
+
+@font-face {
+    font-family: Inconsolata;
+    src: url(../fonts/Inconsolata-Regular.ttf);
+    font-weight:400;
+}
+
+body {
+  font-family: Inconsolata;
+}
+a{
+	color:#fff;
+}
+a:hover{
+	color:rgba(000,000,000,);
+	text-decoration: none;
+}
+h1 {
+    font-size: 80px;
+    color: #605F5F;
+}
+
+h2 {
+  font-size: 46px;
+  color: lightblue;
+}
+input{
+    padding-right: 30px;
+}
+.fx {
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+
+.img-fondo{
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/background.jpg");
+  min-height: 100%;
+}
