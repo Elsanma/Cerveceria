@@ -8,6 +8,7 @@
     class DaoClass1 extends Singleton implements IDao
     {
       protected $myPdo;
+
       public function getAll()
       {
         try
@@ -19,7 +20,6 @@
           $class1->execute();
 
           while($row = $class1->fetch()){
-              var_dump($row);
               $v = new Class1();
               $v->id = $row->id;
               $v->columnaA = $row->columnaA;
@@ -57,8 +57,11 @@
       {
         try
         {
-          Connection::Conectar();
-          $class1 = $this->myPdo->prepare("SELECT * from Class1 where id = $id");
+          /*$a = new Connection();
+          $a = $a->Conectar();
+          var_dump($a);*/
+          $myPdo=Connection::Conectar();
+          $class1 = $myPdo->prepare("SELECT * from Class1 where id = $id");
           $class1->setFetchMode(\PDO::FETCH_CLASS, Class1::class);
           $class1->execute();
           $class1 = $class1->fetch();

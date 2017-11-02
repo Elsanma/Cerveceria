@@ -14,20 +14,22 @@
         {
           $class1Array = array();
           Connection::Conectar();
+          $class1 = $this->myPdo->prepare("SELECT * FROM tipocerveza");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoTipoCerveza::class);
+          $class1->execute();
 
-          $query=$this->myPdo->prepare("SELECT * FROM tipocerveza");
-          $query->execute();
-          $result = $query->fetchAll();
 
-          foreach ($result as $a) {
-
-            $class1Array[]= new Class1($a['id'],$a['nombre'],$a['descripcion'],$a['precio_litro']);
+          while($row = $class1->fetch()){
+            //print_r($row);
+              $v = new Class1();
+              $v->id = $row->id;
+              $v->nombre = $row->nombre;
+              $v->descripcion = $row->descripcion;
+              $v->precio_litro = $row->precio_litro;
+              $class1Array[] = $v;
           }
-
           $conexion = null;
-
           return $class1Array;
-
         }
         catch (Exception $ex)
         {
@@ -39,15 +41,12 @@
       {
         try
         {
-          $nombre=$class1Object->getNombre();
-          $descripcion=$class1Object->getDescripcion();
-          $precio=$class1Object->getPrecioLitro();
           Connection::Conectar();
-          $query = $this->myPdo->prepare("INSERT into tipocerveza (nombre,descripcion,precio_litro) values ('$nombre','$descripcion','$precio') ");
-          $query->execute();
-          $query->fetchAll();
-          echo 'Agregado a la base de datos';
-
+          $class1 = $this->myPdo->prepare("INSERT into tipocerveza (nombre,descripcion,precio_litro) values ('$class1Object->nombre','$class1Object->descripcion','$class1Object->precio_litro')");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoTipoCerveza::class);
+          if($class1->execute()){
+              echo 'Agregado a la base de datos';
+          };
         }
         catch (Exception $ex)
         {
@@ -61,12 +60,10 @@
         {
           Connection::Conectar();
           $class1 = $this->myPdo->prepare("SELECT * from tipocerveza where id = $id");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoTipoCerveza::class);
           $class1->execute();
           $class1 = $class1->fetch();
-
-          $retorno= new Class1($class1['id'],$class1['nombre'],$class1['descripcion'],$class1['precio_litro']);
-
-          return $retorno;
+          return $class1;
         }
         catch (Exception $ex)
         {
@@ -79,8 +76,8 @@
         try
         {
           Connection::Conectar();
-          $id=$class1Object->getId();
-          $class1 = $this->myPdo->prepare("DELETE FROM tipocerveza WHERE id = '$id' ");
+          $class1 = $this->myPdo->prepare("DELETE FROM tipocerveza WHERE id = '$class1Object->id' ");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoTipoCerveza::class);
           if($class1->execute()){
               echo 'Eliminado de la base de datos';
           };
@@ -96,16 +93,14 @@
         try
         {
           Connection::Conectar();
-          $nombre=$class1Object->getNombre();
-          $descripcion=$class1Object->getDescripcion();
-          $precio=$class1Object->getPrecioLitro();
-          $id=$class1Object->getId();
           $class1 = $this->myPdo->prepare(
             "UPDATE tipocerveza SET
-            nombre = '$nombre',
-            descripcion = '$descripcion',
-            precio_litro = '$precio'
-            WHERE id = '$id' ");
+            nombre = '$class1Object->nombre',
+            descripcion = '$class1Object->descripcion',
+            precio_litro = '$class1Object->precio_litro'
+            WHERE id = '$class1Object->id' ");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoTipoCerveza::class);
+          var_dump($class1);
           if($class1->execute()){
               echo 'Actualizado en la base de datos';
           };

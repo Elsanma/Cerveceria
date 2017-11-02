@@ -3,7 +3,6 @@
     src: url(../fonts/Inconsolata-Bold.ttf);
     font-weight:800;
 }
-
 @font-face {
     font-family: Inconsolata;
     src: url(../fonts/Inconsolata-Regular.ttf);
@@ -13,6 +12,9 @@
 body {
   font-family: Inconsolata;
 }
+form{
+  margin-top: 15px;
+}
 a{
 	color:#fff;
 }
@@ -20,9 +22,14 @@ a:hover{
 	color:rgba(000,000,000,);
 	text-decoration: none;
 }
+fieldset{
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}
 h1 {
-    font-size: 80px;
-    color: #605F5F;
+    font-size: 70;
+    color: grey;
 }
 
 h2 {
@@ -30,7 +37,7 @@ h2 {
   color: lightblue;
 }
 input{
-    padding-right: 30px;
+  padding-right: 30px;
 }
 .fx {
 	-webkit-transition: all 400ms ease;
@@ -39,10 +46,49 @@ input{
 	-o-transition: all 400ms ease;
 	transition: all 400ms ease;
 }
-
 .img-fondo{
   background-position: center;
   background-size: cover;
   background-image: url("../img/background.jpg");
   min-height: 100%;
+}
+.img-fondo5{
+  background-position: center;
+  background-size: cover;
+  background-image: url("../img/background_5.jpg");
+  min-height: 100%;
+}
+.greys {
+  filter: grayscale(100%);
+}
+.radius{
+border-radius: 15px 15px 15px 15px;
+}
+.blanco {
+  color: white;
+}
+.no-radius{
+  border-radius: 0px;
+}
+.bg-negro{
+  background-color: black;
+}
+.opacidad{
+  opacity: 0.8;
+}
+.tag {
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center
+}
+.bg-gradient{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#131313+33,444444+66,828282+99 */
+  background: #131313; /* Old browsers */
+  background: -moz-linear-gradient(top, #131313 33%, #444444 66%, #828282 99%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #131313 33%,#444444 66%,#828282 99%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #131313 33%,#444444 66%,#828282 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#131313', endColorstr='#828282',GradientType=0 ); /* IE6-9 */
 }

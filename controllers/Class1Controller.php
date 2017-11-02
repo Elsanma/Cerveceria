@@ -45,9 +45,9 @@
         $v = new Class1();
         if($_POST)
         {
-            $v->columnaA = $columnaA;
-            $v->columnaB = $columnaB;
-            $v->columnaC = $columnaC;
+            $v->setColumna1($columnaA);
+            $v->setColumna2($columnaB);
+            $v->setColumna3($columnaC);
             MyDao::insert($v);
          }
       }

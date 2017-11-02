@@ -8,18 +8,16 @@ namespace models;
  */
 class classProducto
 {
-	private $id;
-	private $nombre;
-	private $capacidad;
+	public $nombre;
+	public $capacidad;
 /*
 	function __construct classTipoCerveza()
 	{
 		//vacio papu
 	}
 */
-	public function __construct($id='',$nombre='',$capacidad='')
+	public function __construct($nombre='',$capacidad='')
 	{
-		$this->id = $id;
 		$this->nombre = $nombre;
 		$this->capacidad = $capacidad;
 	}
@@ -33,18 +31,11 @@ class classProducto
 	{
 		return $this->nombre;
 	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
-
-
 	/**
 	 *
 	 * @param newVal
 	 */
-	public function setCapacidad($newVal)
+	public function setCapacidad(String $newVal)
 	{
 		$this->capacidad = $newVal;
 	}
@@ -54,15 +45,9 @@ class classProducto
 	 * @param newVal
 	 */
 
-	public function setNombre($newVal)
+	public function setNombre(String $newVal)
 	{
 		$this->nombre = $newVal;
-	}
-
-
-	public function setId($newVal)
-	{
-		$this->id = $newVal;
 	}
 
 }

@@ -18,7 +18,7 @@
       try
       {
         $class1 = MyDao::getAll();
-        require_once "views/Producto/index.php";
+        $this->view('Producto/index',['classProducto' => $class1]);
       }
       catch (Exception $ex)
       {
@@ -30,7 +30,7 @@
     {
       try
       {
-        require_once "views/Producto/create.php";
+        $this->view('Producto/create');
       }
       catch (Exception $ex)
       {
@@ -45,8 +45,8 @@
         $v = new Class1();
         if($_POST)
         {
-            $v->setNombre($nombre);
-            $v->setCapacidad($capacidad);
+            $v->nombre = $nombre;
+            $v->capacidad = $capacidad;
             MyDao::insert($v);
          }
       }
@@ -61,7 +61,7 @@
       try
       {
         $class1 = MyDao::getOne($id);
-        require_once "views/Producto/edit.php";
+        $this->view('Producto/edit',['Producto' => $class1]);
       }
       catch (Exception $ex)
       {
@@ -74,9 +74,9 @@
       try
       {
         $class1 = MyDao::getOne($id);
-        $class1->setId($id);
-        $class1->setNombre($nombre);
-        $class1->setCapacidad($capacidad);
+        $class1->id = $id;
+        $class1->nombre = $nombre;
+        $class1->capacidad = $capacidad;
         MyDao::update($class1);
       }
       catch (Exception $ex)
@@ -85,7 +85,7 @@
         die;
       }
     }
-
+    
     public function delete($id)
     {
       try

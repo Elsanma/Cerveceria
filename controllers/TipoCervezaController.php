@@ -18,8 +18,7 @@
       try
       {
         $class1 = MyDao::getAll();
-        require_once "views/TipoCerveza/index.php";
-        //$this->view('TipoCerveza/index',['classTipoCerveza' => $class1]);
+        $this->view('TipoCerveza/index',['classTipoCerveza' => $class1]);
       }
       catch (Exception $ex)
       {
@@ -46,9 +45,9 @@
         $v = new Class1();
         if($_POST)
         {
-            $v->setNombre($nombre);
-            $v->setDescripcion($descripcion);
-            $v->setPrecioLitro($precio_litro);
+            $v->nombre = $nombre;
+            $v->descripcion = $descripcion;
+            $v->precio_litro = $precio_litro;
             MyDao::insert($v);
          }
       }
@@ -63,7 +62,7 @@
       try
       {
         $class1 = MyDao::getOne($id);
-        require_once "views/TipoCerveza/edit.php";
+        $this->view('TipoCerveza/edit',['TipoCerveza' => $class1]);
       }
       catch (Exception $ex)
       {
@@ -76,10 +75,10 @@
       try
       {
         $class1 = MyDao::getOne($id);
-        $class1->setId($id);
-        $class1->setNombre($nombre);
-        $class1->setDescripcion($descripcion);
-        $class1->setPrecioLitro($precio_litro);
+        $class1->id = $id;
+        $class1->nombre = $nombre;
+        $class1->descripcion = $descripcion;
+        $class1->precio_litro = $precio_litro;
         MyDao::update($class1);
       }
       catch (Exception $ex)

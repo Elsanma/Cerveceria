@@ -14,14 +14,18 @@
         {
           $class1Array = array();
           Connection::Conectar();
+          $class1 = $this->myPdo->prepare("SELECT * FROM productos");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoProducto::class);
+          $class1->execute();
 
-          $query=$this->myPdo->prepare("SELECT * FROM productos");
-          $query->execute();
-          $result = $query->fetchAll();
 
-          foreach ($result as $a) {
-
-            $class1Array[]= new Class1($a['id'],$a['nombre'],$a['capacidad']);
+          while($row = $class1->fetch()){
+            //print_r($row);
+              $v = new Class1();
+              $v->id = $row->id;
+              $v->nombre = $row->nombre;
+              $v->capacidad = $row->capacidad;
+              $class1Array[] = $v;
           }
           $conexion = null;
           return $class1Array;
@@ -36,13 +40,12 @@
       {
         try
         {
-          $nombre=$class1Object->getNombre();
-          $capacidad=$class1Object->getCapacidad();
           Connection::Conectar();
-          $query = $this->myPdo->prepare("INSERT into productos (nombre,capacidad) values ('$nombre','$capacidad') ");
-          $query->execute();
-          $query->fetchAll();
-          echo 'Agregado a la base de datos';
+          $class1 = $this->myPdo->prepare("INSERT into productos (nombre,capacidad) values ('$class1Object->nombre','$class1Object->capacidad')");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoProducto::class);
+          if($class1->execute()){
+              echo 'Agregado a la base de datos';
+          };
         }
         catch (Exception $ex)
         {
@@ -56,12 +59,10 @@
         {
           Connection::Conectar();
           $class1 = $this->myPdo->prepare("SELECT * from productos where id = $id");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoProducto::class);
           $class1->execute();
           $class1 = $class1->fetch();
-
-          $retorno= new Class1($class1['id'],$class1['nombre'],$class1['capacidad']);
-
-          return $retorno;
+          return $class1;
         }
         catch (Exception $ex)
         {
@@ -74,8 +75,8 @@
         try
         {
           Connection::Conectar();
-          $id=$class1Object->getId();
-          $class1 = $this->myPdo->prepare("DELETE FROM productos WHERE id = '$id' ");
+          $class1 = $this->myPdo->prepare("DELETE FROM productos WHERE id = '$class1Object->id' ");
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoProducto::class);
           if($class1->execute()){
               echo 'Eliminado de la base de datos';
           };
@@ -87,19 +88,18 @@
         }
       }
       public function update($class1Object)
-      {
+      {        
         try
         {
           Connection::Conectar();
-          $nombre=$class1Object->getNombre();
-          $capacidad=$class1Object->getCapacidad();
-          $id=$class1Object->getId();
-          $query = $this->myPdo->prepare(
+          $class1 = $this->myPdo->prepare(
             "UPDATE productos SET
-            nombre = '$nombre',
-            capacidad = '$capacidad'
-            WHERE id = '$id' ");
-          if($query->execute()){
+            nombre = '$class1Object->nombre',
+            capacidad = '$class1Object->capacidad'
+            WHERE id = '$class1Object->id' ");           
+          $class1->setFetchMode(\PDO::FETCH_CLASS, DaoProducto::class);
+          var_dump($class1);
+          if($class1->execute()){
               echo 'Actualizado en la base de datos';
           };
         }
